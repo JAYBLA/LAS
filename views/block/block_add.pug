@@ -1,0 +1,30 @@
+extends ../layout
+
+block content
+	.container
+		.row
+			div.alert.alert-success Block / Add
+	br
+	h3#title.text-center Block Add
+	hr
+	br
+	.container#form
+		form(action="" method="POST" name="block_add_form")
+			label(for="block_name_input") Block Name
+			.form-group
+				input#block_name_input.form-control(type="text" placeholder="Block Name" name="block_name")
+				small#emailHelp.form-text.text-muted Enter Unique Block Name
+			label(for="select_project") Select Project
+			select.form-control.form-control(select="") Select Project
+				option(value="") Select Project
+				option(value="") NALA
+				option(value="") NZUGUNI
+			br
+			label(for="select_location") Select Location
+			select.form-control.form-control(select="") Select Location
+				option(value="") Select Location
+				option(value="") NALA
+				option(value="") NZUGUNI
+			br
+			.form-group
+				button.btn.btn-primary(type="submit") ADD BLOCK

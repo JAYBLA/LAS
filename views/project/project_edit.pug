@@ -1,0 +1,23 @@
+extends ../layout
+
+block content
+	.container
+		.row
+			div.alert.alert-primary Project / Edit
+	br
+	h3#titleEdit.text-center Project Edit
+	hr
+	br
+	.container#form
+		form(action="" method="POST" name="plot_edit_form")
+			label(for="project_name_input") Project Name
+			.form-group
+				input#project_name_input.form-control(type="text" placeholder="Project Name" name="project_name")
+			label(for="status") Status
+			.form-group
+				select#status.form-control(select) Select Status
+					option(value="") select status
+					option(value="") Active
+					option(value="") Inactive
+			.form-group
+				button.btn.btn-primary(type="submit") UPDATE PROJECT

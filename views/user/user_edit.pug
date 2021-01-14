@@ -1,0 +1,29 @@
+extends ../layout
+
+block content
+	.container
+		.row
+			div.alert.alert-primary User / Edit
+	br
+	h3#titleEdit.text-center User Edit
+	hr
+	br
+	.container#form
+		form(action="" method="POST" name="user_edit_form")
+			label(for="firstName") First Name
+			.form-group
+				input#firstName_input.form-control(type="text" placeholder="Enter First Name" name="first_name")
+			label(for="lastName") Last Name
+			.form-group
+				input#lastName_input.form-control(type="text" placeholder="Enter Last Name" name="last_name")
+			label(for="userName") UserName
+			.form-group
+				input#username_input.form-control(type="text" placeholder="Enter UserName" name="userName")
+			label(for="status") Status
+			.form-group
+				select#status.form-control(select) Select Status
+					option(value="") select status
+					option(value="") Active
+					option(value="") Inactive
+			.form-group
+				button.btn.btn-primary(type="submit") UPDATE USER

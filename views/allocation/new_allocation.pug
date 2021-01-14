@@ -1,0 +1,51 @@
+extends ../layout
+
+block content
+	.container
+		.row
+			div.alert.alert-success Allocate / Add
+	br
+	h3#title.text-center Allocate Add
+	hr
+	br
+	.container#form
+		form(action="" method="POST" name="allocate_add_form")
+			label(for="customer_name_input") Customer Name
+			.form-group
+				input#customer_name_input.form-control(type="text" placeholder="Customer Name" name="customer_name" required) 
+				small#emailHelp.form-text.text-muted Enter Customer Name
+			label(for="customer_contact_input") Customer Contact
+			.form-group
+				input#block_name_input.form-control(type="text" placeholder="Customer Contact" name="customer_contact")
+			label(for="select_project") Select Project
+			.form-group
+				select.form-control(select="") Select Project
+					option(value="") Select Project
+					option(value="") NALA
+					option(value="") NZUGUNI
+			label(for="select_location") Select Location
+			.form-group
+				select.form-control(select="") Select Location
+					option(value="") Select Location
+					option(value="") NALA
+					option(value="") NZUGUNI
+					option(value="") NZUGUNI
+			label(for="select_block") Select Block
+			.form-group
+				select.form-control(select="") Select Block
+					option(value="") Select Block
+					option(value="") NALA
+					option(value="") NZUGUNI
+					option(value="") NZUGUNI
+			label(for="select_Plot") Select Plot
+			.form-group
+				select.form-control(select="") Select Plot
+					option(value="") Select Plot
+					option(value="") NALA
+					option(value="") NZUGUNI
+					option(value="") NZUGUNI
+			label(for="amount_add") Amount (Optional)
+			.form-group
+				input#amountadd.form-control(type="number" name="amountadd" placeholder="Enter Amount Optional")
+			.form-group
+				button.btn.btn-primary(type="submit") ALLOCATE PLOT
