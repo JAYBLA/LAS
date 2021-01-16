@@ -11,17 +11,6 @@ const paginate = require("express-paginate");
 const Sequelize  = require('sequelize');
 const db = require("../models");
 
-
-
-const redirectLogin = function (req, res, next) {
-  if (!req.session.userId) {
-    res.redirect("/login");
-  } else {
-    next();
-  }
-};
-
-
 const sequelize = new Sequelize({
   // The `host` parameter is required for other databases
   host: "localhost",
@@ -38,8 +27,6 @@ sequelize.authenticate()
     console.error("Unable to connect to the database:", err);
   });
   
-  
-
 
 // keep this before all routes that will use pagination
 router.use(paginate.middleware(10, 10));
@@ -80,12 +67,12 @@ var csrfProtection = csurf({
   cookie: true,
 });
 
-//register user
+// register user
 router.get("/init", function (req, res, next) {
-  const firstName = "Admin";
-  const lastName = "Super";
+  const firstName = "Super";
+  const lastName = "Admin";
   const userName = firstName.concat("." , lastName)
-  const password = "123";
+  const password = "12";
   bcrypt.hash(password, 10, function (err, hash) {
     var user = sequelize.define("users", {
       firstName: Sequelize.STRING,
@@ -94,8 +81,11 @@ router.get("/init", function (req, res, next) {
       password: Sequelize.STRING,
       statusId: Sequelize.INTEGER
     });
+    var status = sequelize.define("statuses", {
+      statusName: Sequelize.STRING
+    })
     sequelize.sync().then(function () {
-      return user
+      return db.user
         .create({
           firstName: firstName,
           lastName: lastName,
@@ -104,7 +94,8 @@ router.get("/init", function (req, res, next) {
           statusId: 1
         },{
           include: [{
-            all: true
+            model: db.status,
+            as: 'status'
           }]
         })
         .then(function (data) {
@@ -113,12 +104,22 @@ router.get("/init", function (req, res, next) {
               plain: true,
             })
           );
+          return false
         });
     });
   });
 });
 
 
+
+//initiate session variable (userId)
+const redirectLogin = function (req, res, next) {
+  if (!req.session.userId) {
+    res.redirect("/login");
+  } else {
+    next();
+  }
+};
 
 
 // route for user Login
@@ -133,12 +134,19 @@ router.post("/auth", function (req, res, next) {
     password: Sequelize.STRING,
     statusId: Sequelize.INTEGER
   });
+  var status = sequelize.define("statuses", {
+    statusName: Sequelize.STRING,
+  })
   sequelize.sync().then(function () {
-    return user
+    return db.user
       .findOne({
         where: {
           userName: userName,
         },
+          include: [{
+            model: db.status,
+            as: 'status'
+          }]
       })
       .then(function (user) {
         if (user == null) {
@@ -154,6 +162,8 @@ router.post("/auth", function (req, res, next) {
               res.redirect("/login");
             }
             if (next) {
+              console.log(user)
+              console.log(user.status.statusName)
               req.flash('success', 'Welcome ' + user.userName)
               req.session.userId = user.userName;
               req.session.save(() => res.redirect("/dashboard"));
@@ -165,17 +175,7 @@ router.post("/auth", function (req, res, next) {
         }
       });
   });
-   then(function(data){
-    console.log(data.get({
-      plain: true
-    }))
-  })
 });
-
-
-
-
-
 
 
 /* GET users listing. */
@@ -185,20 +185,55 @@ router.get('/', function(req, res, next) {
   
 });
 
-router.get('/user', function(req, res, next){
-  res.render('user', {title: "CCD | USERS"})
+router.get('/user',redirectLogin, function(req, res, next){
+  var user = sequelize.define("users", {
+    firstName: Sequelize.STRING,
+    lastName: Sequelize.STRING,
+    userName: Sequelize.STRING,
+    password: Sequelize.STRING,
+    statusId: Sequelize.INTEGER
+  })
+  var status = sequelize.define("statuses", {
+    statusName: Sequelize.STRING
+  })
+  sequelize.sync().then(function(){
+    return db.user
+    .findAll({
+      where: where,
+      include: [{
+        model: db.status,
+        as: 'status'
+      }]
+    }).then(function(user){
+
+      if(!user){
+        req.flash('danger', errors)
+        req.redirect('/user')
+      }
+      if(user){
+        console.log(user)
+        res.render('user', {title: "CCD | USERS",
+        userData: req.session.userId,
+        userDetails: user})
+      }
+    })
+  })
+  
 })
 
-router.get('/user/add', function(req, res, next){
-  res.render('user_add', {title: "CCD | ADD USER"})
+router.get('/user/add',redirectLogin, function(req, res, next){
+  res.render('user_add', {title: "CCD | ADD USER",
+  userData: req.session.userId})
 })
 
-router.get('/user/edit', function(req, res, next){
+router.get("/user/edit",redirectLogin, function(req, res, next){
   res.render('user_edit', {title: "CCD | EDIT USER"})
 })
 
-router.get('/user/change-password', function(req, res, next){
-  res.render('user_password', {title: "CCD | USERS"})
+router.get('/user/change-password', redirectLogin,function(req, res, next){
+  res.render('user_password', {title: "CCD | USERS",
+  userData: req.session.userId
+})
 })
 
 module.exports = router;

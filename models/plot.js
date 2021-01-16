@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes){
       type: DataTypes.STRING,
       allowNull: false
     },
-    plotuseId: {
+    plotUseId: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
@@ -25,7 +25,7 @@ module.exports = function(sequelize, DataTypes){
   },{})
   plot.associate = function(models){
     plot.belongsTo(models.plotuse, {
-      foreignKey: 'plotuseId'
+      foreignKey: 'plotUseId'
     })
     plot.belongsTo(models.block, {
       foreignKey: 'blockId'

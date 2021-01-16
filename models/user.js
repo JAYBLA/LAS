@@ -24,8 +24,9 @@ module.exports = function(sequelize, DataTypes){
     }
   },{})
   user.associate = function(models){
-    user.belongsTo(models.status, {
-      foreignKey: 'statusId'
+    models.user.belongsTo(models.status, {
+      foreignKey: 'statusId',
+      as: 'status'
     })
     user.hasMany(models.project)
   }

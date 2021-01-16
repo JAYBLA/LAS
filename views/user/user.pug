@@ -9,26 +9,19 @@ block content
         thead
             tr
                 th(scope='col') #
-                th(scope='col') First
-                th(scope='col') Last
-                th(scope='col') Handle
-                th(scope='col') Last
-                th(scope='col') Last
-                th(scope='col') Handle
-                th(scope='col') Last
-                th(scope='col') Handle
+                th(scope='col') First Name
+                th(scope='col') Last Name
+                th(scope='col') User Name
+                th(scope='col') Status
                 th(scope='col') Action
         tbody
+        each user in userDetails
             tr
-                th(scope='row') 1
-                td Mark
-                td Otto
-                td @mdo
-                td Otto
-                td @mdo
-                td Otto
-                td Otto
-                td @mdo
+                td(scope='col') #{user.id}
+                td(scope='col') #{user.firstName}
+                td(scope='col') #{user.lastName}
+                td(scope='col') #{user.userName}
+                td(scope='col') #{user.statusName}
                 td
                     a#tableBtn.btn.btn-sm.btn-primary(href="/user/edit") Edit
                     a#tableBtn.btn.btn-sm.btn-danger(href="") Delete

@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
+
+ 
 const userFile = require('./users');
 router.use(userFile);
 
+//initiate session variable (userId)
 const redirectLogin = function (req, res, next) {
   if (!req.session.userId) {
     res.redirect("/login");
@@ -108,4 +111,5 @@ router.get('/user/change-password', redirectLogin, function(req, res, next){
   res.render('user_password', {title: "CCD | USERS",
   userData: req.session.userId})
 })
+
 module.exports = router;

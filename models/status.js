@@ -8,7 +8,9 @@ module.exports = function(sequelize, DataTypes){
     }
   },{})
   status.associate = function(models) {
-    status.hasMany(models.user)
+    models.status.hasMany(models.user, {
+      as: 'statusId'
+    })
     status.hasMany(models.project)
     status.hasMany(models.plot)
   }
