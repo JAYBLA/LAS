@@ -2,6 +2,21 @@ extends ../layout
 
 block content
     .container
+      .div#flash
+        div.col.md-12
+          if successes
+            for success in successes
+              div.alert.alert-success(role='alert')
+                button.close(type='button' data-dismiss='alert' aria-label='Close')
+                  span(aria-hidden='true') ×
+                strong #{ success }
+          if errors
+            for error in errors
+              div.alert.alert-success(role='alert')
+                button.close(type='button' data-dismiss='alert' aria-label='Close')
+                  span(aria-hidden='true') ×
+                strong #{ error }
+    .container
         .row
             div.alert.alert-secondary Location /
     a#btnAdd.btn.btn-md.btn-success(href="/location/add") ADD
@@ -9,26 +24,17 @@ block content
         thead
             tr
                 th(scope='col') #
-                th(scope='col') First
-                th(scope='col') Last
-                th(scope='col') Handle
-                th(scope='col') Last
-                th(scope='col') Last
-                th(scope='col') Handle
-                th(scope='col') Last
-                th(scope='col') Handle
+                th(scope='col') Location
+                th(scope='col') Blocks
+                th(scope='col') Plots
                 th(scope='col') Action
         tbody
+        for ldata in ld
             tr
-                th(scope='row') 1
-                td Mark
-                td Otto
-                td @mdo
-                td Otto
-                td @mdo
-                td Otto
-                td Otto
-                td @mdo
-                td
+                td(scope='col')
+                td(scope='col') #{ldata.locationName}
+                td(scope='col') Otto
+                td(scope='col') @mdo
+                td(scope='col')
                     a#tableBtn.btn.btn-sm.btn-primary(href="/location/edit") Edit
                     a#tableBtn.btn.btn-sm.btn-danger(href="") Delete

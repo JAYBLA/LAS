@@ -2,6 +2,21 @@ extends ../layout
 
 block content
     .container
+      .div#flash
+        div.col.md-12
+          if successes
+            for success in successes
+              div.alert.alert-success(role='alert')
+                button.close(type='button' data-dismiss='alert' aria-label='Close')
+                  span(aria-hidden='true') ×
+                strong #{ success }
+          if errors
+            for error in errors
+              div.alert.alert-success(role='alert')
+                button.close(type='button' data-dismiss='alert' aria-label='Close')
+                  span(aria-hidden='true') ×
+                strong #{ error }
+    .container
         .row
             div.alert.alert-secondary User /
     a#btnAdd.btn.btn-md.btn-success(href="/user/add") ADD
@@ -15,13 +30,14 @@ block content
                 th(scope='col') Status
                 th(scope='col') Action
         tbody
-        each user in userDetails
+        for user in userDetails
             tr
-                td(scope='col') #{user.id}
+                td(scope='col') 
                 td(scope='col') #{user.firstName}
                 td(scope='col') #{user.lastName}
                 td(scope='col') #{user.userName}
-                td(scope='col') #{user.statusName}
-                td
+                td.status(scope='col' data-status=user.status.statusName)
+                  span.badge #{user.status.statusName}
+                td(scope='col')
                     a#tableBtn.btn.btn-sm.btn-primary(href="/user/edit") Edit
                     a#tableBtn.btn.btn-sm.btn-danger(href="") Delete

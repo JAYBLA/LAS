@@ -2,6 +2,21 @@ extends ../layout
 
 block content
     .container
+      .div#flash
+        div.col.md-12
+          if successes
+            for success in successes
+              div.alert.alert-success(role='alert')
+                button.close(type='button' data-dismiss='alert' aria-label='Close')
+                  span(aria-hidden='true') ×
+                strong #{ success }
+          if errors
+            for error in errors
+              div.alert.alert-success(role='alert')
+                button.close(type='button' data-dismiss='alert' aria-label='Close')
+                  span(aria-hidden='true') ×
+                strong #{ error }
+    .container
         .row
             div.alert.alert-secondary Project /
     a#btnAdd.btn.btn-md.btn-success(href="/project/add") ADD
@@ -9,26 +24,25 @@ block content
         thead
             tr
                 th(scope='col') #
-                th(scope='col') First
-                th(scope='col') Last
-                th(scope='col') Handle
-                th(scope='col') Last
-                th(scope='col') Last
-                th(scope='col') Handle
-                th(scope='col') Last
-                th(scope='col') Handle
+                th(scope='col') Project
+                th(scope='col') Locations
+                th(scope='col') Blocks
+                th(scope='col') Plots
+                th(scope='col') User
+                th(scope='col') Status
                 th(scope='col') Action
         tbody
-            tr
-                th(scope='row') 1
-                td Mark
-                td Otto
-                td @mdo
-                td Otto
-                td @mdo
-                td Otto
-                td Otto
-                td @mdo
-                td
-                    a#tableBtn.btn.btn-sm.btn-primary(href="/project/edit") Edit
-                    a#tableBtn.btn.btn-sm.btn-danger(href="") Delete
+        for projDatas in projData
+          tr
+              td(scope='col')
+              td#Project(scope='col') #{projDatas.projectName}
+              each location in locations
+                td(scope='col') #{location.countResult}
+              td(scope='col') 0
+              td(scope='col') 0
+              td(scope='col') #{projDatas.user.userName}
+              td.status(scope='col' data-status=projDatas.status.statusName)
+                span.badge #{projDatas.status.statusName}
+              td
+                  a#tableBtn.btn.btn-sm.btn-primary(href="/project/edit/" + projDatas.id) Edit
+                  a#tableBtn.btn.btn-sm.btn-danger(href="") Delete

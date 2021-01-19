@@ -1,12 +1,87 @@
 extends layout
 
 block content
-    .container
-      .div#flash
-        div.col.md-12
-          if successes
-            for success in successes
-              div.alert.alert-success #{ success }
-          if errors
-            for error in errors
-              div.alert.alert-danger #{ error }
+  .container
+    .div#flash
+      div.col.md-12
+        if successes
+          for success in successes
+            div.alert.alert-success(role='alert')
+              button.close(type='button' data-dismiss='alert' aria-label='Close')
+                span(aria-hidden='true') ×
+              strong #{ success }
+        if errors
+          for error in errors
+            div.alert.alert-success(role='alert')
+              button.close(type='button' data-dismiss='alert' aria-label='Close')
+                span(aria-hidden='true') ×
+              strong #{ error }
+  #root
+    .container.pt-5
+      .row.align-items-stretch
+        .c-dashboardInfo.col-lg-3.col-md-6
+          .wrap
+            h4.heading.heading5.hind-font.medium-font-weight.c-dashboardInfo__title
+              | Project
+            span.hind-font.caption-12.c-dashboardInfo__count 1234
+        .c-dashboardInfo.col-lg-3.col-md-6
+          .wrap
+            h4.heading.heading5.hind-font.medium-font-weight.c-dashboardInfo__title
+              | Plot Added
+            span.hind-font.caption-12.c-dashboardInfo__count 12345
+        .c-dashboardInfo.col-lg-3.col-md-6
+          .wrap
+            h4.heading.heading5.hind-font.medium-font-weight.c-dashboardInfo__title
+              | Allocated Plot
+            span.hind-font.caption-12.c-dashboardInfo__count 123456
+        .c-dashboardInfo.col-lg-3.col-md-6
+          .wrap
+            h4.heading.heading5.hind-font.medium-font-weight.c-dashboardInfo__title
+              | DCC Plot
+            span.hind-font.caption-12.c-dashboardInfo__count 1234567
+  br
+  .container.py-5
+    .row
+      .col-md-12
+        .row
+          .col-md-5
+            // form card login
+            .card.rounded-0
+              .card-header#addplotuse
+                h3.mb-0 Add Plot Use
+              .card-body
+                form#formLogin.form(role='form' autocomplete='off' action="/plotuse" method='POST')
+                  .form-group
+                    label(for='uname1') Plot Use Name
+                    input#uname1.form-control.rounded-0(type='text' name='plot_use_name' required)
+                    .invalid-feedback Oops, you missed this one.
+                  button#btnLogin.btn.btn-primary.btn-sm.float-right(type='submit') ADD
+              // /card-block
+              // /form card login
+              // /row
+              // /col
+              // /row
+          .col-md-7.mr-auto
+            .card.rounded-0
+              table.table
+                thead
+                  tr
+                    th(scope='col') #
+                    th(scope='col') Plot Use
+                    th(scope='col') Action
+                tbody
+                for plotuse in plotUseData
+                  tr
+                    td(scope='col') 
+                    td(scope='col') #{plotuse.plotUseName}
+                    td(scope='col')
+                      a#tableBtn.btn.btn-sm.btn-primary(href="/plotuse/edit") Edit
+                      a#tableBtn.btn.btn-sm.btn-danger(href="") Delete
+  //container
+  script.
+    window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+    $(this).remove();
+    });
+    }, 2000);
+

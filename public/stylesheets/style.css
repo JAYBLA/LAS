@@ -213,3 +213,102 @@ div.alert {
 #flash{
     margin-top: 3em;
 }
+table tbody tr .status[data-status = "Active"]{
+    color: green;
+    font-weight: bolder;
+    font-size: large;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+table tbody tr .status[data-status = "Inactive"]{
+    color: red;
+    font-weight: bolder;
+    font-size: large;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+}
+.text-muted {
+    color: red!important;
+    font-weight: bold;
+}
+
+.c-dashboardInfo {
+    margin-bottom: 15px;
+  }
+  .c-dashboardInfo .wrap {
+    background: #ffffff;
+    box-shadow: 2px 10px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 7px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    padding: 40px 25px 20px;
+    height: 100%;
+  }
+  .c-dashboardInfo__title,
+  .c-dashboardInfo__subInfo {
+    color: #6c6c6c;
+    font-size: 1.18em;
+  }
+  .c-dashboardInfo span {
+    display: block;
+  }
+  .c-dashboardInfo__count {
+    font-weight: 600;
+    font-size: 2.5em;
+    line-height: 64px;
+    color: #323c43;
+  }
+  .c-dashboardInfo .wrap:after {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    content: "";
+  }
+  
+  .c-dashboardInfo:nth-child(1) .wrap:after {
+    background: rgb(32, 146, 32);
+  }
+  .c-dashboardInfo:nth-child(2) .wrap:after {
+    background: rgb(221, 52, 52);
+  }
+  .c-dashboardInfo:nth-child(3) .wrap:after {
+    background: rgb(83, 83, 240);
+  }
+  .c-dashboardInfo:nth-child(4) .wrap:after {
+    background: rgb(218, 218, 69);
+  }
+  .c-dashboardInfo__title svg {
+    color: #d7d7d7;
+    margin-left: 5px;
+  }
+  .MuiSvgIcon-root-19 {
+    fill: currentColor;
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    font-size: 24px;
+    transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    user-select: none;
+    flex-shrink: 0;
+  }
+  
+  .table {
+    counter-reset: serial-number;  /* Set the serial number counter to 0 */
+  }
+  
+  .table td:first-child:before {
+    counter-increment: serial-number;  /* Increment the serial number counter */
+    content: counter(serial-number);  /* Display the counter */
+  }
+
+.table tbody tr td#Project{
+    font-weight: bold;
+}
+#addplotuse{
+    background-color:  rgb(83, 83, 240);
+    color: white;
+}

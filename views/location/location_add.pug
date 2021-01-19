@@ -9,16 +9,16 @@ block content
 	hr
 	br
 	.container#form
-		form(action="" method="POST" name="allocation_add_form")
+		form(action="/locationadd" method="POST" name="allocation_add_form")
 			label(for="select_project") Select Project
-			select.form-control.form-control(select="") Select Project
-				option(value="") Select Project
-				option(value="") NALA
-				option(value="") NZUGUNI
+			select.form-control.form-control(select="" name="projectSelect"  required) Select Project
+				option(value="" name="select") Select Project
+				for pdata in pjData
+					option(value=pdata.id) #{pdata.projectName}
 			br
 			label(for="location_name_input") Location Name
 			.form-group
-				input#location_name_input.form-control(type="text" placeholder="Location Name" name="location_name")
+				input#location_name_input.form-control(type="text" placeholder="Location Name" name="location_name" required)
 				small#emailHelp.form-text.text-muted Enter Unique Location Name
 			.form-group
 				button.btn.btn-primary(type="submit") ADD LOCATION

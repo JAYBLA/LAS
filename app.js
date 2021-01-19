@@ -29,6 +29,7 @@ const userEditRouter = require('./routes/users');
 const userPassword = require('./routes/users')
 const initRouter = require('./routes/index');
 const loginRouter = require('./routes/index');
+const statusRouter = require('./routes/users');
 
 const app = express();
 
@@ -54,7 +55,7 @@ app.use('/', indexRouter);
 app.use('/dashboard', mainRouter);
 app.use('/project', projectRouter);
 app.use('/project/add', projectAddRouter);
-app.use('/project/edit', projectEditRouter);
+app.use("/project/edit/:id", projectEditRouter);
 app.use('/location', locationRouter);
 app.use('/location/add', locationAddRouter);
 app.use('/location/edit', locationEditRouter);
@@ -72,6 +73,7 @@ app.use('/allocation', allocRouter);
 app.use('/allocation/add', allocNewRouter);
 app.use('/init', initRouter);
 app.use('/login', loginRouter)
+app.use('/status', statusRouter);
 
 
 // catch 404 and forward to error handler

@@ -9,7 +9,7 @@ block content
 	hr
 	br
 	.container#form
-		form(action="" method="POST" name="user_add_form")
+		form(action="/adduser" method="POST" name="user_add_form")
 			label(for="firstName") First Name
 			.form-group
 				input#firstName_input.form-control(type="text" placeholder="Enter First Name" name="first_name")
@@ -18,15 +18,10 @@ block content
 				input#lastName_input.form-control(type="text" placeholder="Enter Last Name" name="last_name")
 			label(for="userName") UserName
 			.form-group
-				input#username_input.form-control(type="text" placeholder="Enter UserName" name="userName")
-			label(for="Password") Password
-			.form-group
-				input#password_input.form-control(type="password" placeholder="Enter Password" name="password")
+				input#username_input.form-control(type="text" placeholder="Enter UserName" name="username")
 			label(for="status") Status
 			.form-group
-				select#status.form-control(select) Select Status
-					option(value="") select status
-					option(value="") Active
-					option(value="") Inactive
+				input#status_input.form-control(type="number" placeholder="Enter Status Number To refer" name="status_number")
+				small#status_input_small.form-text.text-muted 1: Active , 2: Inactive
 			.form-group
 				button.btn.btn-primary(type="submit") ADD USER

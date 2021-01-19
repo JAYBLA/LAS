@@ -9,26 +9,20 @@ block content
         thead
             tr
                 th(scope='col') #
-                th(scope='col') First
-                th(scope='col') Last
-                th(scope='col') Handle
-                th(scope='col') Last
-                th(scope='col') Last
-                th(scope='col') Handle
-                th(scope='col') Last
-                th(scope='col') Handle
+                th(scope='col') Plot Number
+                th(scope='col') Plot Size
+                th(scope='col') Plot Use
+                th(scope='col') Block
+                th(scope='col') Status
                 th(scope='col') Action
         tbody
             tr
-                th(scope='row') 1
-                td Mark
-                td Otto
-                td @mdo
-                td Otto
-                td @mdo
-                td Otto
-                td Otto
-                td @mdo
+                td(scope='col') 
+                td(scope='col') Mark
+                td(scope='col') Otto
+                td(scope='col') @mdo
+                td(scope='col') Otto
+                td(scope='col') @mdo
                 td
-                    a#tableBtn.btn.btn-sm.btn-primary(href="/project/edit") Edit
+                    a#tableBtn.btn.btn-sm.btn-primary(href="/plot/edit") Edit
                     a#tableBtn.btn.btn-sm.btn-danger(href="") Delete
